@@ -12,9 +12,9 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            font-family: 'Montserrat', sans-serif; /* 好きなフォントに */
+            font-family: 'Playfair Display'; /* 好きなフォントに */
             /* ▼ 背景画像を設定：好きな画像のURLに差し替えてください */
-            background: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200') no-repeat center center/cover;
+            background: url('bg-galaxy.jpg'); no-repeat center center/cover;
         }
 
         /* 中央の半透明パネル（グラスモーフィズム） */
@@ -26,12 +26,12 @@
             text-align: center;
             color: white;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            width: 60%;
+            width: 40%;
             max-width: 600px;
         }
 
         #time {
-            font-size: 80px;
+            font-size: 50px;
             font-weight: bold;
             margin: 0;
         }
@@ -57,9 +57,42 @@
     <div class="container">
         <div id="date"></div>
         <div id="time">00:00:00</div>
-        <div id="quote">"Strive not to be a success, but rather to be of value."</div>
+        <div id="quote">"Loading..."</div>
     </div>
+    
+    <script>
+    // 1. 名言のリストを作る（好きなだけ増やせます）
+    const quotes = [
+        '"Audentis Fortuna juvat."',
+        '"Vita brevis, Ars longa."',
+        '"Per asprera ad astra."',
+        '"Vivat academia! vivat professores!"',
+        '"Musica canit, Arithmetica munerat, Geometrica ponderat, Astronomica colit astra."'
+    ];
 
+    // 2. ランダムに名言を選んで表示する関数
+    function setRandomQuote() {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        document.getElementById('quote').textContent = quotes[randomIndex];
+    }
+
+    function updateClock() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('time').textContent = `${h}:${m}:${s}`;
+        
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+    }
+
+    // 初回実行
+    setInterval(updateClock, 1000);
+    updateClock();
+    setRandomQuote(); // ページを開いた時にランダムで表示
+    </script>
+    
     <script>
         function updateClock() {
             const now = new Date();
