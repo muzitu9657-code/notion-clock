@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* ここでデザインを調整します */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif; /* 好きなフォントに */
+            /* ▼ 背景画像を設定：好きな画像のURLに差し替えてください */
+            background: url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1200') no-repeat center center/cover;
+        }
+
+        /* 中央の半透明パネル（グラスモーフィズム） */
+        .container {
+            background: rgba(0, 0, 0, 0.4); /* 黒の40%透明 */
+            backdrop-filter: blur(10px); /* 背景をぼかす */
+            padding: 40px 60px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        #time {
+            font-size: 80px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        #date {
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        #quote {
+            font-style: italic;
+            font-size: 16px;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="date"></div>
+        <div id="time">00:00:00</div>
+        <div id="quote">"Strive not to be a success, but rather to be of value."</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // 時計の更新
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('time').textContent = `${h}:${m}:${s}`;
+            
+            // 日付の更新
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
